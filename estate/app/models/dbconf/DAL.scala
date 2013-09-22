@@ -6,6 +6,10 @@ import models.DatabaseComponent
 /**
  *          Date: 21.09.13
  */
+trait Profile {
+    val profile: ExtendedProfile
+}
+
 class DAL(override val profile: ExtendedProfile) extends DatabaseComponent with Profile {
 
     import profile.simple._
@@ -19,6 +23,6 @@ class DAL(override val profile: ExtendedProfile) extends DatabaseComponent with 
 import play.api.Play.current
 
 object AppDB extends DBeable {
-    lazy val database = getDb
-    lazy val dal = getDal
+    def database = getDb
+    def dal = getDal
 }

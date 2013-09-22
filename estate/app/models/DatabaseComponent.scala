@@ -8,7 +8,7 @@ import scala.slick.lifted.ColumnBase
  */
 
 case class Role(id: Option[Int], role: String)
-case class User(id: Option[Int], email: String, firstName: String, lastName: String, roleId: Int)
+case class User(id: Option[Int], email: String, firstName: String, lastName: String, roleId: Option[Int])
 
 trait DatabaseComponent { this: Profile =>
 
@@ -23,12 +23,12 @@ trait DatabaseComponent { this: Profile =>
 
     object Users extends Table[User]("USERS") {
         def id = column[Int]("USER_ID", O.PrimaryKey, O.AutoInc)
-        def email = column[String]("EMAIL")
+        def email = column[String]("EMAIL", O.NotNull)
         def firstName = column[String]("FIRST_NAME")
         def lastName = column[String]("LAST_NAME")
-        def roleId = column[Int]("ROLE_ID")
+        def roleId = column[Int]("ROLE_ID", O.Nullable)
         def role = foreignKey("ROLE_FK", roleId, Roles)(_.id)
-        def * : ColumnBase[User] = id.? ~ email ~ firstName ~ lastName ~ roleId <>(User, User unapply _)
+        def * : ColumnBase[User] = id.? ~ email ~ firstName ~ lastName ~ roleId.? <>(User, User unapply _)
         def emailIndex = index("email_idx", email, unique = true)
     }
 

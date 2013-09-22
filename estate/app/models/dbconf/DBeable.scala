@@ -1,12 +1,12 @@
 package models.dbconf
 
 import play.api.Application
-import play.api.db.DB
 import scala.slick.driver.ExtendedProfile
 import scala.slick.session.Database
+import play.api.db.DB
 
 /**
- *          Date: 21.09.13
+ *          Date: 22.09.13
  */
 trait DBeable {
 

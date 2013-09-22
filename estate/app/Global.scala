@@ -7,15 +7,21 @@ import scala.slick.session.Session
  */
 object Global extends GlobalSettings {
 
+    import AppDB._
+
     override def onStart(app: Application) {
         implicit val application: Application = app
-
-        lazy val database = AppDB.database
-        lazy val dal = AppDB.dal
 
         database withSession { implicit session: Session =>
             dal.create
         }
     }
 
+    override def onStop(app: Application) {
+        implicit val application: Application = app
+
+        database withSession {implicit session: Session =>
+            dal.drop
+        }
+    }
 }
