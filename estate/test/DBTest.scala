@@ -70,9 +70,9 @@ class DBTest extends Specification {
 
                 database withSession { implicit session: Session =>
                     Users.insertAll(
-                        User(None, "test1@gmail.com", "test1", "test1", None),
-                        User(None, "test2@gmail.com", "test2", "test2", None),
-                        User(None, "test3@gmail.com", "test3", "test3", None)
+                        User(None, "test1@gmail.com", "123", "test1", "test1", None),
+                        User(None, "test2@gmail.com", "123", "test2", "test2", None),
+                        User(None, "test3@gmail.com", "123", "test3", "test3", None)
                     )
                     val users = Query(Users).list()
                     users.size mustEqual 3
@@ -93,9 +93,9 @@ class DBTest extends Specification {
                         Role(Some(2), "EXPERT")
                     )
                     Users.insertAll(
-                        User(None, "test1@gmail.com", "test1", "test1", Some(1)),
-                        User(None, "test2@gmail.com", "test2", "test2", Some(2)),
-                        User(None, "test3@gmail.com", "test3", "test3", Some(2))
+                        User(None, "test1@gmail.com", "123", "test1", "test1", Some(1)),
+                        User(None, "test2@gmail.com", "123", "test2", "test2", Some(2)),
+                        User(None, "test3@gmail.com", "123", "test3", "test3", Some(2))
                     )
                     val joinQuery = for {
                         (u, r) <- Users innerJoin Roles on (_.roleId === _.id)
