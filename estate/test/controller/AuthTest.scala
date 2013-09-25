@@ -8,6 +8,7 @@ import models.User
 import controllers.Authentication
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
+import play.GlobalSettings
 
 /**
  *          Date: 24.09.13
@@ -29,7 +30,7 @@ class AuthTest extends Specification {
                     Users.insert(User(None, email, pass, "test", "test", None))
                 }
 
-                val exists = Authentication.check(email, pass)
+                val exists = new Authentication(data).check(email, pass)
                 exists must beTrue
             }
         }
@@ -40,7 +41,7 @@ class AuthTest extends Specification {
                 import data._
                 import data.profile.simple._
 
-                val exists = Authentication.check("test@test.com", "123")
+                val exists = new Authentication(data).check("test@test.com", "123")
                 exists must beFalse
             }
         }

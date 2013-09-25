@@ -20,9 +20,3 @@ class DAL(override val profile: ExtendedProfile) extends DatabaseComponent with 
 
 }
 
-import play.api.Play.current
-
-object AppDB extends DBeable {
-    def database = getDb
-    def dal = getDal
-}

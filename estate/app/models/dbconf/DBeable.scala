@@ -25,3 +25,12 @@ trait DBeable {
         Class.forName(name + '$').getField("MODULE$").get(manifest.runtimeClass).asInstanceOf[T]
 
 }
+
+import play.api.Play.current
+
+object AppDB extends DBeable {
+    def database = getDb
+    def dal = getDal
+}
+
+

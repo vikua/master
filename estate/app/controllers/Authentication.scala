@@ -9,11 +9,15 @@ import play.api._
 import scala.slick.session.Session
 import models.dbconf.AppDB._
 import models.User
+import javax.inject.{Inject, Singleton}
+import app.TestBean
+import models.dbconf.DAL
 
 /**
  *          Date: 22.09.13
  */
-object Authentication extends Controller {
+@Singleton
+class Authentication @Inject() (val dal: DAL) extends Controller {
 
     val loginForm = Form(
         tuple(
@@ -25,9 +29,8 @@ object Authentication extends Controller {
     )
 
     def check(email: String, password: String) = {
-        val data = dal
-        import data.profile.simple._
-        import data._
+        import dal.profile.simple._
+        import dal._
 
         val user = database withSession { implicit session: Session =>
             Users.map {e => e}.where(u => u.email === email && u.password === password).take(1).firstOption
