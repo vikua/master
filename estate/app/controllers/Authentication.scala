@@ -10,8 +10,9 @@ import scala.slick.session.Session
 import models.dbconf.AppDB._
 import models.User
 import javax.inject.{Inject, Singleton}
-import app.TestBean
 import models.dbconf.DAL
+import scala.beans._
+import scala.annotation.meta.beanSetter
 
 /**
  *          Date: 22.09.13

@@ -8,7 +8,7 @@ import models.User
 import controllers.Authentication
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
-import play.GlobalSettings
+import app.inject.injector
 
 /**
  *          Date: 24.09.13
@@ -30,7 +30,7 @@ class AuthTest extends Specification {
                     Users.insert(User(None, email, pass, "test", "test", None))
                 }
 
-                val exists = new Authentication(data).check(email, pass)
+                val exists = injector.getInstance(classOf[Authentication]).check(email, pass)
                 exists must beTrue
             }
         }
@@ -38,10 +38,8 @@ class AuthTest extends Specification {
         "fail authentication" in {
             running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
                 val data = dal
-                import data._
-                import data.profile.simple._
 
-                val exists = new Authentication(data).check("test@test.com", "123")
+                val exists = injector.getInstance(classOf[Authentication]).check("test@test.com", "123")
                 exists must beFalse
             }
         }
