@@ -31,7 +31,7 @@ class DBTest extends Specification {
 
                     val list = Query(Roles).list()
                     list.size mustEqual 3
-                    list.foreach(_.id must beSome[Int])
+                    list.forall(_.id.isDefined) must beTrue
                 }
             }
         }
@@ -75,8 +75,10 @@ class DBTest extends Specification {
                         User(None, "test3@gmail.com", "123", "test3", "test3", None)
                     )
                     val users = Query(Users).list()
+                    users.isEmpty must beFalse
                     users.size mustEqual 3
-                    users.foreach(_.id must beSome[Int])
+                    users.forall(_.id.isDefined) must beTrue
+                    users.forall(_.password === "123") must beTrue
                 }
             }
         }
