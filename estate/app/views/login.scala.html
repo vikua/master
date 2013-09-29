@@ -1,32 +1,38 @@
 @(loginForm: Form[(String, String)])(implicit flash: Flash)
 
-@import helper._
+<!DOCTYPE html>
 
-@main("Login") {
+<html>
     <head>
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
     </head>
-    @form(routes.Authentication.authenticate) {
-        <h1>Sign in</h1>
-        @loginForm.globalError.map { error =>
-            <p class="error">
-                @error.message
-            </p>
-        }
-        @flash.get("success").map { message =>
-            <p class="success">
-                @message
-            </p>
-        }
-        <p>
-            <input type="email" name="email" placeholder="Email" id="email" value="@loginForm("email").value">
-        </p>
-        <p>
-            <input type="password" name="password" id="password" placeholder="Password">
-        </p>
-        <p>
-            <button type="submit" id="loginbutton">Login</button>
-        </p>
-    }
+    <body>
+        @import helper._
 
-}
+        @form(routes.Authentication.authenticate) {
+            <h1>Sign in</h1>
+            @loginForm.globalError.map { error =>
+                <p class="error">
+                    @error.message
+                </p>
+            }
+            @flash.get("success").map { message =>
+                <p class="success">
+                    @message
+                </p>
+            }
+            <p>
+                <input type="email" name="email" placeholder="Email" id="email" value="@loginForm("email").value">
+            </p>
+            <p>
+                <input type="password" name="password" id="password" placeholder="Password">
+            </p>
+            <p>
+                <a href="@routes.Register.registration() ">Don't have an account</a>
+            </p>
+            <p>
+                <button type="submit" id="loginbutton">Login</button>
+            </p>
+        }
+    </body>
+</html>

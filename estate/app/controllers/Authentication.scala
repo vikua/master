@@ -36,7 +36,7 @@ class Authentication @Inject() (val dal: DAL) extends Controller {
         val user = database withSession { implicit session: Session =>
             Users.map {e => e}.where(u => u.email === email && u.password === password).take(1).firstOption
         }
-        user.isInstanceOf[Some[User]]
+        user.isDefined
     }
 
     def login = Action { implicit request =>
