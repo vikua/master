@@ -9,7 +9,6 @@ import play.api._
 import scala.slick.session.Session
 import models.dbconf.AppDB._
 import models.User
-import javax.inject.{Inject, Singleton}
 import models.dbconf.DAL
 import scala.beans._
 import scala.annotation.meta.beanSetter
@@ -17,8 +16,9 @@ import scala.annotation.meta.beanSetter
 /**
  *          Date: 22.09.13
  */
-@Singleton
-class Authentication @Inject() (val dal: DAL) extends Controller {
+object Authentication extends Controller {
+
+    val dal = models.dbconf.AppDB.dal
 
     val loginForm = Form(
         tuple(

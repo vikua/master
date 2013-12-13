@@ -1,7 +1,7 @@
 import models.dbconf.AppDB
 import play.api.{Application, GlobalSettings}
 import scala.slick.session.Session
-import app.inject._
+
 /**
  * Date: 21.09.13
  */
@@ -27,5 +27,4 @@ object Global extends GlobalSettings {
         }
     }
 
-    override def getControllerInstance[A](controllerClass: Class[A]): A = injector.getInstance(controllerClass)
 }
