@@ -16,7 +16,8 @@ object ApplicationBuild extends Build {
 //        "com.google.inject" % "guice" % "3.0",
 //        "javax.inject" % "javax.inject" % "1",
 
-        "org.mockito" % "mockito-core" % "1.9.5" % "test"
+        "org.scalatest" %% "scalatest" % "2.0" % "test" withSources(),
+        "org.mockito" % "mockito-core" % "1.9.5" % "test" withSources()
     )
 
 
