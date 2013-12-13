@@ -1,11 +1,11 @@
 package test.db
 
-import models.{User, Role}
 import play.api.test._
 import play.api.test.Helpers._
 import models.dbconf.AppDB._
-import scala.slick.session.Session
 import org.scalatest.{ShouldMatchers, FlatSpec}
+import play.api.db.slick.Config.driver.simple._
+import models.entities.{Users, User, Roles, Role}
 
 /**
  * Date: 22.09.13
@@ -14,11 +14,6 @@ class DBTest extends FlatSpec with ShouldMatchers {
 
     "Roles" should "be saved" in {
         running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
-            val d = dal
-
-            import d._
-            import d.profile.simple._
-
             database withSession {
                 implicit session: Session =>
                     Roles.insertAll(
@@ -36,11 +31,6 @@ class DBTest extends FlatSpec with ShouldMatchers {
 
     it should "be deleted" in {
         running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
-            val d = dal
-
-            import d._
-            import d.profile.simple._
-
             database withSession {
                 implicit session: Session =>
                     Roles.insertAll(
@@ -60,11 +50,6 @@ class DBTest extends FlatSpec with ShouldMatchers {
 
     "Users" should "be saved" in {
         running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
-            val d = dal
-
-            import d._
-            import d.profile.simple._
-
             database withSession {
                 implicit session: Session =>
                     Users.insertAll(
@@ -82,11 +67,6 @@ class DBTest extends FlatSpec with ShouldMatchers {
     }
     it should "be saved and attached to Roles" in {
         running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
-            val d = dal
-
-            import d._
-            import d.profile.simple._
-
             database withSession {
                 implicit session: Session =>
                     Roles.insertAll(

@@ -11,8 +11,8 @@ object ApplicationBuild extends Build {
         jdbc,
         anorm,
 
-//        "com.typesafe.play" %% "play-slick" % "0.5.0.8",
-        "com.typesafe.slick" % "slick_2.10" % "1.0.1",
+        "com.typesafe.play" %% "play-slick" % "0.5.0.8",
+//        "com.typesafe.slick" % "slick_2.10" % "1.0.1",
 //        "com.google.inject" % "guice" % "3.0",
 //        "javax.inject" % "javax.inject" % "1",
 

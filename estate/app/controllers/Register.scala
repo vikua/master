@@ -1,16 +1,17 @@
 package controllers
 
+import models.entities.User
 import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import models._
+
 /**
  *          Date: 9/29/13
  */
 object Register extends Controller {
 
-    val registrationForm = Form(
+    val registrationForm = Form[User](
         mapping(
             "email" -> email,
             "password" -> nonEmptyText,

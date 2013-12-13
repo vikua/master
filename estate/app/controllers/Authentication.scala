@@ -1,24 +1,19 @@
 package controllers
 
+import models.entities.Users
+import models.dbconf.AppDB._
 import play.api.mvc.{Action, Controller}
 import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import play.api._
-import scala.slick.session.Session
-import models.dbconf.AppDB._
-import models.User
-import models.dbconf.DAL
-import scala.beans._
-import scala.annotation.meta.beanSetter
+import play.api.db.slick.Config.driver.simple._
 
 /**
  *          Date: 22.09.13
  */
 object Authentication extends Controller {
-
-    val dal = models.dbconf.AppDB.dal
 
     val loginForm = Form(
         tuple(
@@ -30,10 +25,7 @@ object Authentication extends Controller {
     )
 
     def check(email: String, password: String) = {
-        import dal.profile.simple._
-        import dal._
-
-        val user = database withSession { implicit session: Session =>
+        val user = database withSession { implicit session: scala.slick.session.Session =>
             Users.map {e => e}.where(u => u.email === email && u.password === password).take(1).firstOption
         }
         user.isDefined
