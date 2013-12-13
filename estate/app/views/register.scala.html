@@ -1,0 +1,13 @@
+@(registrationForm: Form[User])
+
+@import helper._
+
+@main("Registration") {
+
+    <div class="bodyDiv">
+        @form(routes.Register.register) {
+            <h1>Fill registration form</h1>
+        }
+    </div>
+
+}
